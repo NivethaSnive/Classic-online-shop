@@ -9,13 +9,15 @@ const ProductDetails = ({ addToCart }) => {
   if (!product) return <h2>Product not found</h2>;
 
   return (
-    <div className="details">
-      <img src={product.image} alt={product.name} />
-      <div>
-        <h2>{product.name}</h2>
-        <p>{product.description}</p>
-        <h3>₹{product.price}</h3>
-        <button onClick={() => addToCart(product)}>Add to Cart</button>
+    <div className="product-detail">
+      <div className="product-detail-content">
+        <img src={`/images/${product.image}`} alt={product.name} />
+        <div className="product-info">
+          <h2>{product.name}</h2>
+          <p>{product.description}</p>
+          <h3>₹{product.price}</h3>
+          <button onClick={() => addToCart(product)}>Add to Cart</button>
+        </div>
       </div>
     </div>
   );
