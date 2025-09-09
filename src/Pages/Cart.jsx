@@ -1,11 +1,8 @@
 import React from "react";
 
-function Cart({ cart = [], onRemove }) {
-  // Ensure cart is always an array
+function Cart({ cart = [], onRemoveIndex }) {
   const safeCart = Array.isArray(cart) ? cart : [];
-
-  // Calculate total
-  const total = safeCart.reduce((sum, item) => sum + item.price, 0);
+  const total = safeCart.reduce((sum, item) => sum + (item.price || 0), 0);
 
   return (
     <div className="cart-page">
@@ -14,25 +11,27 @@ function Cart({ cart = [], onRemove }) {
       {safeCart.length === 0 ? (
         <p className="empty-cart">Your cart is empty. Start shopping!</p>
       ) : (
-        <>
-          <div className="cart-list">
+        <div className="cart-container">
+          <div className="cart-items">
             {safeCart.map((item, index) => (
-              <div key={index} className="cart-item">
-                <img src={item.image} alt={item.name} />
+              <div key={index} className="cart-card">
+                <img src={`/images/${item.image}`} alt={item.name} />
                 <div className="cart-info">
                   <h3>{item.name}</h3>
                   <p>₹{item.price}</p>
-                  <button onClick={() => onRemove(item)}>❌ Remove</button>
+                  <button onClick={() => onRemoveIndex(index)}>❌ Remove</button>
                 </div>
               </div>
             ))}
           </div>
 
           <div className="cart-summary">
-            <h3>Total: <span className="total-price">₹{total}</span></h3>
+            <h3>
+              Total: <span className="total-price">₹{total}</span>
+            </h3>
             <button className="checkout-btn">Proceed to Checkout</button>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
