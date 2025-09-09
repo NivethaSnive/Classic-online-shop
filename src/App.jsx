@@ -12,11 +12,10 @@ import "./styles.css";
 function App() {
   const [cart, setCart] = useState([]);
 
-  const addToCart = (product) => setCart([...cart, product]);
-  const removeFromCart = (productToRemove) =>
-    setCart(cart.filter((p) => p !== productToRemove));
+  const addToCart = (product) => setCart((prev) => [...prev, product]);
+  const removeFromCartByIndex = (indexToRemove) =>
+    setCart((prev) => prev.filter((_, i) => i !== indexToRemove));
 
-  // ✅ Create routes
   const router = createBrowserRouter([
     {
       path: "/",
@@ -53,7 +52,7 @@ function App() {
       element: (
         <>
           <Navbar cartCount={cart.length} />
-          <Cart cart={cart} removeFromCart={removeFromCart} />
+          <Cart cart={cart} onRemoveIndex={removeFromCartByIndex} />
           <Footer />
         </>
       ),
