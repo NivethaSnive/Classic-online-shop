@@ -14,7 +14,7 @@ html, body, #root {
   scroll-behavior: smooth;
 
   /* Full-page background image */
-  background: url("image.jpg") no-repeat center center fixed;
+  background: url("image1.jpg") no-repeat center center fixed;
   background-size: cover;
   background-position: center;
   position: relative;
